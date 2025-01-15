@@ -4,6 +4,7 @@ const Login = () => {
   return (
     <div className="bg-gray-100 flex justify-center items-center min-h-screen">
       <div className="bg-white p-8 rounded-xl shadow-lg w-96">
+      <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">Bounty-Basket</h1>
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Login</h2>
         <form>
           <div className="mb-4">
