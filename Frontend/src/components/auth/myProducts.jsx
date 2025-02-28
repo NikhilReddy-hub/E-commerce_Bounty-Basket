@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Nav from "../auth/nav";
+import NavBar from "../auth/nav";
 
 function Myproduct({ _id, name, images, description, price }) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -55,7 +55,7 @@ function Myproduct({ _id, name, images, description, price }) {
                 <div className="w-full mt-4">
                     <p className="text-lg font-bold my-2">${price.toFixed(2)}</p>
                     <button
-                        className="w-full text-white px-4 py-2 rounded-md bg-black hover:bg-gray-700 transition duration-300"
+                        className="w-full text-white px-4 py-2 rounded-md bg-neutral-900 hover:bg-neutral-700 transition duration-300"
                         onClick={handleEdit}
                     >
                         Edit
