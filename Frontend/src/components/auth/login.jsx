@@ -1,42 +1,66 @@
 import { React, useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import { useDispatch } from 'react-redux';
+import { setemail } from "../../store/userAction";
 
 const Login = () => {
   // State to hold email and password values
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); // For handling error messages
+  const dispatch = useDispatch(); // For dispatching actions to the Redux store
+  // Handle form submission
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault(); // Prevent the default form submit behavior
+  //   try {
+  //     // Make the POST request to the backend (replace with your actual API endpoint)
+  //     const response = await axios.post("http://localhost:8000/api/v2/user/login", { email, password });
+      
+  //     // Assuming response contains a token or user data on successful login
+  //     console.log(response.data);
+  //     // Redirect or take some action upon successful login here
+  //   } catch (error) {
+  //     // Handle errors (e.g., invalid credentials)
+  //     setError("There was an error logging in. Please check your credentials.");
+  //     console.error("There was an error logging in!", error);
+  //   }
+  // };
+
+
+
+
 
   // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submit behavior
-    try {
-      // Make the POST request to the backend (replace with your actual API endpoint)
-      const response = await axios.post("http://localhost:8000/api/v2/user/login", { email, password });
-      
-      // Assuming response contains a token or user data on successful login
-      console.log(response.data);
-      // Redirect or take some action upon successful login here
-    } catch (error) {
-      // Handle errors (e.g., invalid credentials)
-      setError("There was an error logging in. Please check your credentials.");
-      console.error("There was an error logging in!", error);
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent the default form submit behavior
+  try {
+  // Make the POST request to the backend (replace with your actual API
+  const response = await
+  axios.post("http://localhost:8000/api/v2/user/login", { email, password });
+  dispatch(setemail(email));//add this line
+  // Assuming response contains a token or user data on successful login
+  console.log(response.data);
+  // Redirect or take some action upon successful login here
+  } catch (error) {
+  // Handle errors (e.g., invalid credentials)
+  setError("There was an error logging in. Please check your credentials.");
+  console.error("There was an error logging in!", error);
+  }
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="hover:text-pink-500 mt-6 text-center text-3xl font-extrabold text-blue-500">
-          Login
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Login to your account
         </h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6">
                 <div>
-                    <label htmlFor="email" className="flex items-start block text-sm font-medium text-gray-700">Email address</label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
                     <div className="mt-1">
                         <input type="email" name="email" placeholder="Enter email" autoComplete="email" required value={email}
                         onChange={(e)=>setEmail(e.target.value)}
@@ -44,7 +68,7 @@ const Login = () => {
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="password" className="flex items-start block text-sm font-medium text-gray-700">Password</label>
+                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
                     <div className="mt-1">
                         <input type="password" name="password" placeholder="password" autoComplete="password" required value={password}
                         onChange={(e)=>setPassword(e.target.value)}
@@ -58,17 +82,17 @@ const Login = () => {
                         <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">Remember me</label>
                     </div>
                     <div className="text-sm">
-                        <a href=".forgot-password" className="font-medium text-blue-600 hover:text-pink-500 hover:underline">Forgotten Password?</a>
+                        <a href=".forgot-password" className="font-medium text-blue-600 hover:text-blue-500">Forgot Password?</a>
                     </div>
                 </div>
                 <div>
                     {/* onClick for Submit Button */}
-                    <button type="button" onClick={handleSubmit} className="relative w-full h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-pink-700" >
-                        Login
+                    <button type="button" onClick={handleSubmit} className="relative w-full h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700" >
+                        Submit
                     </button>
                 </div>
                 {error && <p className="text-center text-red-900">{error}</p>} {/* Display error message if there is one */}
-                <p className="text-center text-red-900">Don't have an account? <Link to={'/signup'} className="hover:text-pink-500 hover:underline text-blue-600">Sign up</Link></p>
+                <p className="text-center text-red-900">Don't have an account? <Link to={'/signup'} className="text-blue-600">Sign up</Link></p>
             </form>
         </div>
       </div>
